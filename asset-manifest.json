@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/hacktoberfest-dashboard/static/css/main.545390d6.chunk.css",
+    "main.js": "/hacktoberfest-dashboard/static/js/main.3ca861ba.chunk.js",
+    "main.js.map": "/hacktoberfest-dashboard/static/js/main.3ca861ba.chunk.js.map",
+    "runtime-main.js": "/hacktoberfest-dashboard/static/js/runtime-main.2dd5f773.js",
+    "runtime-main.js.map": "/hacktoberfest-dashboard/static/js/runtime-main.2dd5f773.js.map",
+    "static/js/2.6f7af17c.chunk.js": "/hacktoberfest-dashboard/static/js/2.6f7af17c.chunk.js",
+    "static/js/2.6f7af17c.chunk.js.map": "/hacktoberfest-dashboard/static/js/2.6f7af17c.chunk.js.map",
+    "index.html": "/hacktoberfest-dashboard/index.html",
+    "precache-manifest.ca78ae65f45a3535c2be24e51764278d.js": "/hacktoberfest-dashboard/precache-manifest.ca78ae65f45a3535c2be24e51764278d.js",
+    "service-worker.js": "/hacktoberfest-dashboard/service-worker.js",
+    "static/css/main.545390d6.chunk.css.map": "/hacktoberfest-dashboard/static/css/main.545390d6.chunk.css.map",
+    "static/media/allegro.svg": "/hacktoberfest-dashboard/static/media/allegro.b101d99d.svg",
+    "static/media/logo.svg": "/hacktoberfest-dashboard/static/media/logo.cc105787.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2dd5f773.js",
+    "static/js/2.6f7af17c.chunk.js",
+    "static/css/main.545390d6.chunk.css",
+    "static/js/main.3ca861ba.chunk.js"
+  ]
+}
