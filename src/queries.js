@@ -5,10 +5,10 @@ import { gql } from "apollo-boost";
  * @param userNames array of userNames to get
  * @returns DocumentNode
  */
-export function getPullRequests(userNames) {
+export function getPullRequests(userNames, eventDate) {
     return gql`
       {
-        search(query: "is:pr created:2019-10-24 ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
+        search(query: "is:pr created:${eventDate} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
           pageInfo {
             endCursor
             startCursor
@@ -18,6 +18,9 @@ export function getPullRequests(userNames) {
               ... on PullRequest {
                 title
                 repository{
+                  owner {
+                    login
+                  }
                   name
                   url
                   stargazers {

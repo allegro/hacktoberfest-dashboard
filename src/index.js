@@ -10,7 +10,7 @@ const theme = createMuiTheme({ palette: { primary: deepOrange, secondary: indigo
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>
-        <App/>
+        <App eventDate={new Date().toISOString().substr(0,10)}/>
     </ThemeProvider>,
     document.getElementById('root')
 );
