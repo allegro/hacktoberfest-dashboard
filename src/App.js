@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     app: { display: 'grid', gridTemplateColumns: '1fr' }
 }));
 
-function App() {
+function App({eventDate}) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -37,10 +37,10 @@ function App() {
                     <img src={logo} className={classes.logo} alt="logo"/>
                 </header>
                 <main className={classes.main}>
-                    <Typography gutterBottom variant="h3" align="center">TOP 25</Typography>
-                    <Leaderboard />
+                    <Typography gutterBottom variant="h3" align="center">TOP 100</Typography>
+                    <Leaderboard eventDate={eventDate} />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
-                        is:<strong>pr</strong> created:<strong>{new Date().toISOString().substr(0, 10)}</strong> author:<strong>login</strong>
+                        is:<strong>pr</strong> created:<strong>{eventDate}</strong> author:<strong>login</strong>
                     </Typography>
                 </main>
                 <footer className={classes.footer}>

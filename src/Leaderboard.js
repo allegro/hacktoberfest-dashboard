@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const LOCALSTORAGE_KEY = 'github_token';
 
-export default function Leaderboard() {
+export default function Leaderboard({eventDate}) {
     const [token, setToken] = useState(localStorage.getItem(LOCALSTORAGE_KEY));
 
     const client = new ApolloClient({
@@ -45,13 +45,13 @@ export default function Leaderboard() {
     });
 
     return <ApolloProvider client={client}>
-        <PullRequestTable client={client} token={token} setToken={setToken}/>
+        <PullRequestTable client={client} token={token} setToken={setToken} eventDate={eventDate}/>
     </ApolloProvider>;
 }
 
-function PullRequestTable({ client, token, setToken }) {
+function PullRequestTable({ client, token, setToken, eventDate }) {
     const classes = useStyles();
-    const { loading, error, data } = useQuery(getPullRequests(users), { pollInterval: 300000 });
+    const { loading, error, data } = useQuery(getPullRequests(users, eventDate), { pollInterval: 300000 });
 
     if (!token) return <TokenPrompt updateToken={setToken}/>;
 
@@ -77,7 +77,7 @@ function PullRequestTable({ client, token, setToken }) {
                                 <Avatar alt={user.login} src={user.avatarUrl}/>
                             </ListItemAvatar>
                             <ListItemText className={classes.chips}
-                                          primary={<Link href={`https://github.com/${user.login}`}>{user.login}</Link>}
+                                          primary={<Link href={`https://github.com/pulls?q=is%3Apr+author%3A${user.login}+archived%3Afalse+created:${eventDate}`}>{user.login}</Link>}
                                           secondary={renderChips(pullRequests)}/>
                             <ListItemSecondaryAction className={classes.stars}>
                                 <StarIcon style={{ height: 40 }}/>
@@ -107,7 +107,6 @@ function TokenPrompt({ updateToken }) {
 }
 
 function calcScore(pullRequests) {
-    console.log(pullRequests);
     return pullRequests.map(it => it.repository.stargazers.totalCount).reduce((a, b) => a + b, 0)
 }
 
@@ -117,7 +116,9 @@ function renderChips(pullRequests) {
 }
 
 function toUsersMap(data) {
-    return data.search.edges.reduce((acc, edge) => {
+    return data.search.edges
+        .filter(it => it.node.author.login !== it.node.repository.owner.login)
+        .reduce((acc, edge) => {
         const key = JSON.stringify(edge.node.author);
         if (!acc[key]) acc[key] = [];
         acc[key] = acc[key].concat([{
