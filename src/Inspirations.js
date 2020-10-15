@@ -26,12 +26,10 @@ const userRepos = [
         "https://github.com/hashicorp/consul",
         "https://github.com/spring-projects",
         "https://github.com/badges/shields",
-        "https://github.com/allegro/envoy-control",
         "https://github.com/allegro/bigflow",
         "https://github.com/facebook/screenshot-tests-for-android",
         "https://github.com/mac-cain13",
         "https://github.com/Kong/insomnia",
-        "https://github.com/allegro/hermes",
         "https://github.com/resilience4j/resilience4j",
         "https://github.com/spring-projects/spring-fu",
         "https://github.com/micrometer-metrics/micrometer",
@@ -42,7 +40,6 @@ const userRepos = [
         "https://github.com/nodejs/node",
         "https://github.com/Microsoft/TypeScript",
         "https://github.com/Microsoft/vscode",
-        "https://github.com/javers/javers",
         "https://github.com/dankraw/ssh-aliases",
         "https://github.com/Netflix/Hystrix",
         "https://github.com/spring-projects/spring-boot",
@@ -78,7 +75,7 @@ export default function Inspirations() {
             <Typography gutterBottom variant="h4" align="center" className={classes.title}>Inspiracje</Typography>
             <List className={classes.list}>
                 {inspirations.map((it, i) =>
-                    <React.Fragment>
+                    <React.Fragment key={it.title}>
                         <ListItem>
                             <ListItemText primary={it.title} secondary={
                                 <Link href={it.link}>{it.label}</Link>
@@ -93,7 +90,7 @@ export default function Inspirations() {
             </Typography>
             <List dense className={classes.list}>
                 {userRepos.map((it, i) =>
-                    <React.Fragment>
+                    <React.Fragment key={it}>
                         <ListItem>
                             <ListItemText primary={<Link href={it}>{it}</Link>}/>
                         </ListItem>
