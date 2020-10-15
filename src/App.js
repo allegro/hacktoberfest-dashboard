@@ -12,7 +12,7 @@ import Inspirations from "./Inspirations";
 const useStyles = makeStyles(theme => ({
     root: { height: '100vh', width: '100%' },
     brand: { marginRight: theme.spacing(2) },
-    logo: { marginTop: 20, width: '100%' },
+    logo: { marginTop: 20, width: '100%', maxHeight: 300 },
     header: { margin: theme.spacing(4), textAlign: 'center', gridArea: '1 / 1 / 2 / 2' },
     main: { gridArea: '2 / 1 / 3 / 2', color: '#fff' },
     title: { padding: theme.spacing(2) },
@@ -40,7 +40,7 @@ function App() {
                     <Typography gutterBottom variant="h3" align="center">TOP 25</Typography>
                     <Leaderboard />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
-                        is:<strong>pr</strong> created:<strong>2019-10-24</strong> author:<strong>login</strong>
+                        is:<strong>pr</strong> created:<strong>{new Date().toISOString().substr(0, 10)}</strong> author:<strong>login</strong>
                     </Typography>
                 </main>
                 <footer className={classes.footer}>
