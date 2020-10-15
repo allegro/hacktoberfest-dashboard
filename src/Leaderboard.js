@@ -107,13 +107,16 @@ function TokenPrompt({ updateToken }) {
 }
 
 function calcScore(pullRequests) {
-    console.log(pullRequests);
     return pullRequests.map(it => it.repository.stargazers.totalCount).reduce((a, b) => a + b, 0)
 }
 
+function getUniqueRepoNames(pullRequests) {
+    return Array.from(new Set(pullRequests.map(pr => pr.repository.name)))
+}
+
 function renderChips(pullRequests) {
-    return pullRequests.map((pr, i) => <Chip component="small" key={i} style={{ marginLeft: '10px' }} size="small"
-                                             label={pr.repository.name}/>);
+    return getUniqueRepoNames(pullRequests).map((repoName, i) => <Chip component="small" key={i} style={{ marginLeft: '10px' }} size="small"
+                                             label={repoName}/>);
 }
 
 function toUsersMap(data) {
