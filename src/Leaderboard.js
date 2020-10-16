@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const LOCALSTORAGE_KEY = 'github_token';
 
-export default function Leaderboard({eventDate}) {
+export default function Leaderboard({prsAfter}) {
     const [token, setToken] = useState(localStorage.getItem(LOCALSTORAGE_KEY));
 
     const client = new ApolloClient({
@@ -45,13 +45,13 @@ export default function Leaderboard({eventDate}) {
     });
 
     return <ApolloProvider client={client}>
-        <PullRequestTable client={client} token={token} setToken={setToken} eventDate={eventDate}/>
+        <PullRequestTable client={client} token={token} setToken={setToken} prsAfter={prsAfter}/>
     </ApolloProvider>;
 }
 
-function PullRequestTable({ client, token, setToken, eventDate }) {
+function PullRequestTable({ client, token, setToken, prsAfter }) {
     const classes = useStyles();
-    const { loading, error, data } = useQuery(getPullRequests(users, eventDate), { pollInterval: 300000 });
+    const { loading, error, data } = useQuery(getPullRequests(users, prsAfter), { pollInterval: 300000 });
 
     if (!token) return <TokenPrompt updateToken={setToken}/>;
 
@@ -77,7 +77,7 @@ function PullRequestTable({ client, token, setToken, eventDate }) {
                                 <Avatar alt={user.login} src={user.avatarUrl}/>
                             </ListItemAvatar>
                             <ListItemText className={classes.chips}
-                                          primary={<Link href={`https://github.com/pulls?q=is%3Apr+author%3A${user.login}+archived%3Afalse+created:${eventDate}`}>{user.login}</Link>}
+                                          primary={<Link href={`https://github.com/pulls?q=is%3Apr+author%3A${user.login}+archived%3Afalse+created:>${prsAfter}`}>{user.login}</Link>}
                                           secondary={renderChips(pullRequests)}/>
                             <ListItemSecondaryAction className={classes.stars}>
                                 <StarIcon style={{ height: 40 }}/>

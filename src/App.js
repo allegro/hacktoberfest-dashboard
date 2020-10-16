@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     app: { display: 'grid', gridTemplateColumns: '1fr' }
 }));
 
-function App({eventDate}) {
+function App({prsAfter}) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -38,9 +38,9 @@ function App({eventDate}) {
                 </header>
                 <main className={classes.main}>
                     <Typography gutterBottom variant="h3" align="center">TOP 100</Typography>
-                    <Leaderboard eventDate={eventDate} />
+                    <Leaderboard prsAfter={prsAfter} />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
-                        is:<strong>pr</strong> created:<strong>{eventDate}</strong> author:<strong>login</strong>
+                        is:<strong>pr</strong> created after:<strong>{prsAfter}</strong> author:<strong>login</strong>
                     </Typography>
                 </main>
                 <footer className={classes.footer}>

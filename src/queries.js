@@ -5,10 +5,10 @@ import { gql } from "apollo-boost";
  * @param userNames array of userNames to get
  * @returns DocumentNode
  */
-export function getPullRequests(userNames, eventDate) {
+export function getPullRequests(userNames, prsAfter) {
     return gql`
       {
-        search(query: "is:pr created:${eventDate} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
+        search(query: "is:pr created:>${prsAfter} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
           pageInfo {
             endCursor
             startCursor
