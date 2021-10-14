@@ -7,7 +7,6 @@
     "@material-ui/icons": "4.11.2",
     "apollo-boost": "0.4.9",
     "apollo-link-http": "1.5.17",
-    "gh-pages": "3.2.3",
     "graphql": "15.6.1",
     "node-fetch": "2.6.5",
     "react": "17.0.2",
@@ -18,7 +17,6 @@
   "scripts": {
     "refresh": "node scripts/contributions.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "npm run refresh && react-scripts build && cp ./build/index.html ./build/404.html",
     "postbuild": "react-snap",
