@@ -41,7 +41,7 @@ function App() {
                     <Typography gutterBottom variant="h3" align="center">TOP 100</Typography>
                     <Leaderboard contributions={contributions} />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
-                        is:<strong>pr</strong> created:<strong>{contributions.eventDate}</strong> author:<strong>login</strong><br />(last update: <strong>{new Date(contributions.updatedAt).toLocaleTimeString()}</strong>)
+                        is:<strong>pr</strong> created:<strong>{contributions.eventDate}</strong> author:<strong>login</strong><br />(last update: <strong>{new Date(contributions.updatedAt).toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw" })}</strong>)
                     </Typography>
                 </main>
                 <footer className={classes.footer}>
