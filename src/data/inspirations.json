@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Hacktoberfest labeled",
+    "link": "https://github.com/topics/hacktoberfest",
+    "label": "topic: hacktoberfest"
+  },
+  {
+    "title": "Good first issue",
+    "link": "https://github.com/search?q=label%3A%22good+first+issue%22+state%3Aopen&type=Issues&ref=advsearch&l=&l=",
+    "label": "label: \"good first issue\" state:open"
+  },
+  {
+    "title": "Ideal for contribution",
+    "link": "https://github.com/search?q=label%3A%22ideal-for-contribution%22+state%3Aopen&type=Issues",
+    "label": "label:\"ideal for contribution\" state:open"
+  }
+]
