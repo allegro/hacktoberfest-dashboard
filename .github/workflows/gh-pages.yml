@@ -1,6 +1,8 @@
 name: github pages
 
 on:
+  schedule:
+    - cron: '* * * * *'
   push:
     branches: [ main ]
 
