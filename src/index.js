@@ -1,16 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { hydrate, render } from 'react-dom';
+import { createTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import { deepOrange, indigo } from "@material-ui/core/colors";
 import App from './App';
 import './index.css';
 
-const theme = createMuiTheme({ palette: { primary: deepOrange, secondary: indigo } });
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#F74700',
+            contrastText: "#FFFFFF"
+        },
+    },
+});
 
-ReactDOM.render(
+const root = document.getElementById('root');
+const fn = root.hasChildNodes() ? hydrate : render;
+
+fn(
     <ThemeProvider theme={theme}>
-        <App eventDate={new Date().toISOString().substr(0,10)}/>
+        <App />
     </ThemeProvider>,
-    document.getElementById('root')
+    root
 );
