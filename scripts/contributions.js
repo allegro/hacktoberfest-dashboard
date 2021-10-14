@@ -6,7 +6,7 @@ const { getPullRequests } = require("./queries");
 const users = require("../src/data/users.json");
 const { format, persist } = require("./utils");
 
-const token = "";
+const token = process.env['TOKEN'];
 const eventDate = new Date().toISOString().substring(0, 10);
 
 const client = new ApolloClient({
