@@ -25,9 +25,14 @@
     "label": "hacktoberfest.digitalocean.com"
   },
   {
+    "title": "Good First Issue",
+    "link": "https://goodfirstissue.dev/",
+    "label": "goodfirstissue.dev"
+  },
+  {
     "title": "Pull Request Roulette",
     "link": "http://www.pullrequestroulette.com/",
-    "label": "http://www.pullrequestroulette.com"
+    "label": "pullrequestroulette.com"
   },
   {
     "title": "Open Hacktoberfest Issues at Allegro",
