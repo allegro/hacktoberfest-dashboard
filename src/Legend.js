@@ -19,7 +19,7 @@ export default function Legend() {
             <Chip
                 component="small"
                 size="small"
-                label="nazwa reporzytorium"
+                label="nazwa repozytorium"
                 className={classes.repository}
             />
             <div className={classes.score}>
