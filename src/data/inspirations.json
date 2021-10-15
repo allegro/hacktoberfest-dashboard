@@ -23,5 +23,10 @@
     "title": "Official guide",
     "link": "https://hacktoberfest.digitalocean.com/resources/beginners",
     "label": "hacktoberfest.digitalocean.com"
+  },
+  {
+    "title": "Good First Issue",
+    "link": "https://goodfirstissue.dev/",
+    "label": "goodfirstissue.dev"
   }
 ]
