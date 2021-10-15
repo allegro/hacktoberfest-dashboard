@@ -40,7 +40,7 @@ function App() {
                     <img src={logo} className={classes.logo} alt="logo"/>
                     <ul className={classes.guides}>
                       <li><a className={classes.guideLink} href="https://opensource.guide">https://opensource.guide</a></li>
-                      <li><a className={classes.guideLink} href="https://opensource.guide">https://hacktoberfest.digitalocean.com</a></li>
+                      <li><a className={classes.guideLink} href="https://hacktoberfest.digitalocean.com">https://hacktoberfest.digitalocean.com</a></li>
                     </ul>
 
                 </header>

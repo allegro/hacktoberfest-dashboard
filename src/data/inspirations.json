@@ -13,5 +13,15 @@
     "title": "Ideal for contribution",
     "link": "https://github.com/search?q=label%3A%22ideal-for-contribution%22+state%3Aopen&type=Issues",
     "label": "label:\"ideal for contribution\" state:open"
+  },
+  {
+    "title": "Projects that need your help",
+    "link": "https://www.codetriage.com/",
+    "label": "codetriage.com"
+  },
+  {
+    "title": "Official guide",
+    "link": "https://hacktoberfest.digitalocean.com/resources/beginners",
+    "label": "hacktoberfest.digitalocean.com"
   }
 ]
