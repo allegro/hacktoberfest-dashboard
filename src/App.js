@@ -13,6 +13,8 @@ import contributions from "./data/contributions.json";
 const useStyles = makeStyles(theme => ({
     root: { height: '100vh', width: '100%' },
     brand: { marginRight: theme.spacing(2) },
+    guides: { display: 'flex', justifyContent: 'space-between', margin: 0, padding: 0 },
+    guideLink: { color: '#fff' },
     logo: { marginTop: 20, width: '100%', maxHeight: 300 },
     header: { margin: theme.spacing(4), textAlign: 'center', gridArea: '1 / 1 / 2 / 2' },
     main: { gridArea: '2 / 1 / 3 / 2' },
@@ -36,9 +38,14 @@ function App() {
             <Container className={classes.app}>
                 <header className={classes.header}>
                     <img src={logo} className={classes.logo} alt="logo"/>
+                    <ul className={classes.guides}>
+                      <li><a className={classes.guideLink} href="https://opensource.guide">https://opensource.guide</a></li>
+                      <li><a className={classes.guideLink} href="https://opensource.guide">https://hacktoberfest.digitalocean.com</a></li>
+                    </ul>
+
                 </header>
                 <main className={classes.main}>
-                    <Typography gutterBottom variant="h3" align="center">TOP 100</Typography>
+                    <Typography gutterBottom variant="h3" style={{color: 'white'}} align="center">TOP 100</Typography>
                     <Leaderboard contributions={contributions} />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
                         is:<strong>pr</strong> created:<strong>{contributions.eventDate}</strong> author:<strong>login</strong><br />(last update: <strong>{new Date(contributions.updatedAt).toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw" })}</strong>)
