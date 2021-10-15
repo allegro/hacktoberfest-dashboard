@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import Leaderboard from "./Leaderboard";
 import Inspirations from "./Inspirations";
 import contributions from "./data/contributions.json";
+import Legend from './Legend';
 
 const useStyles = makeStyles(theme => ({
     root: { height: '100vh', width: '100%' },
@@ -46,6 +47,7 @@ function App() {
                 </header>
                 <main className={classes.main}>
                     <Typography gutterBottom variant="h3" style={{color: 'white'}} align="center">TOP 100</Typography>
+                    <Legend />
                     <Leaderboard contributions={contributions} />
                     <Typography component="p" variant="caption" align="center" className={classes.title}>
                         is:<strong>pr</strong> created:<strong>{contributions.eventDate}</strong> author:<strong>login</strong><br />(last update: <strong>{new Date(contributions.updatedAt).toLocaleTimeString("pl-PL", { timeZone: "Europe/Warsaw" })}</strong>)
