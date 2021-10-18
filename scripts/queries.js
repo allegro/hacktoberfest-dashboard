@@ -9,7 +9,7 @@ const { gql } = require("apollo-boost");
 function getPullRequests(userNames, eventDate) {
     return gql`
       {
-        search(query: "is:pr created:${eventDate} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
+        search(query: "is:pr created:>=${eventDate} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
           pageInfo {
             endCursor
             startCursor
