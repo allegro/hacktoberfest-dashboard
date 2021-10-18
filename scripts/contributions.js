@@ -7,7 +7,7 @@ const users = require("../src/data/users.json");
 const { format, persist } = require("./utils");
 
 const token = process.env['TOKEN'];
-const eventDate = new Date().toISOString().substring(0, 10);
+const eventDate = '2021-10-15'; //new Date().toISOString().substring(0, 10);
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
