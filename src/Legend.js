@@ -24,7 +24,7 @@ export default function Legend() {
             />
             <div className={classes.score}>
                 <StarIcon className={classes.star} />
-                <Typography>suma gwiazdek z repozytoriów</Typography>
+                <Typography>Suma ilorazów pull requestów oraz gwiazdek repozytoriów</Typography>
             </div>
         </div>
     );
