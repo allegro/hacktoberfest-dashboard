@@ -5,7 +5,8 @@ function toUsersMap(data) {
         .filter(it => it.node.author.login !== it.node.repository.owner.login)
         .reduce((map, edge) => {
             const { login, avatarUrl } = edge.node.author;
-            if (!map[login]) map[login] = { avatar: avatarUrl, contributions: [] };
+            if (!map[login]) map[login] = { avatar: avatarUrl, contributions: [], totalPRs: 0 };
+            map[login].totalPRs++;
             map[login].contributions.push(edge.node.repository);
             return map;
         }, {})
@@ -20,11 +21,12 @@ function getUniqueRepositoryNames(contributions) {
 }
 
 function format(data) {
-    return Object.entries(toUsersMap(data)).map(([login, { avatar, contributions }]) => ({
+    return Object.entries(toUsersMap(data)).map(([login, { avatar, contributions, totalPRs }]) => ({
         login,
         avatar,
         repos: getUniqueRepositoryNames(contributions),
-        score: calculateScore(contributions)
+        score: calculateScore(contributions),
+        totalPRs,
     })).sort((a, b) => b.score - a.score);
 }
 
