@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     root: { width: "100%", backgroundColor: theme.palette.background.paper },
     inline: { display: "inline" },
     chips: { display: "flex", height: 42, alignItems: "center" },
+    chipsContainer: { margin: '-5px 5px' },
+    listItem: { paddingRight: 140 },
     loader: {
         display: "flex",
         height: 200,
@@ -95,13 +97,13 @@ export default function Leaderboard({ contributions }) {
                     <ListItem alignItems="flex-start"><ListItemText>Brak Pull Requestów</ListItemText></ListItem> : ""}
                 {items.map(({ login, avatar, score, repos, totalPRs }, index) => (
                     <React.Fragment key={login}>
-                        <ListItem alignItems="flex-start">
+                        <ListItem className={classes.listItem} alignItems="flex-start">
                             <ListItemAvatar>
                                 <Avatar alt={login} src={avatar}/>
                             </ListItemAvatar>
                             <ListItemText className={classes.chips}
                                         primary={<Link href={`https://github.com/pulls?q=is%3Apr+author%3A${login}+archived%3Afalse+created:${eventDate}`}>{login}</Link>}
-                                        secondary={renderChips(repos)}/>
+                                        secondary={renderChips(repos)} secondaryTypographyProps={{ className: classes.chipsContainer  }} />
                             <ListItemSecondaryAction className={classes.stats}>
                                 <div style={{ marginBottom: 4 }} className={classes.stat}>
                                     <StarIcon className={classes.statIcon}/>
@@ -126,7 +128,7 @@ function renderChips(repos) {
         <Chip
             component="small"
             key={repoName}
-            style={{ marginLeft: '10px' }}
+            style={{ margin: 5 }}
             size="small"
             label={repoName}
         />
