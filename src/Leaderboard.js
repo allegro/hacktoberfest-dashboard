@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     stats: {
         width: 100,
         color: theme.palette.primary.main,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
     },
     stat: {
         display: "flex",
@@ -59,8 +62,6 @@ export default function Leaderboard({ contributions }) {
     const items = useMemo(() => [...data].sort((a, b) => {
         const valueA = a[sortBy];
         const valueB = b[sortBy];
-
-        console.log(a, b, sortBy)
 
         return valueB - valueA;
     }), [data, sortBy]);
@@ -102,11 +103,11 @@ export default function Leaderboard({ contributions }) {
                                         primary={<Link href={`https://github.com/pulls?q=is%3Apr+author%3A${login}+archived%3Afalse+created:${eventDate}`}>{login}</Link>}
                                         secondary={renderChips(repos)}/>
                             <ListItemSecondaryAction className={classes.stats}>
-                                <div className={classes.stat}>
+                                <div style={{ marginBottom: 4 }} className={classes.stat}>
                                     <StarIcon className={classes.statIcon}/>
                                     <Typography className={classes.statText}>{score}</Typography>
                                 </div>
-                                <div style={{ marginBottom: 4 }} className={classes.stat}>
+                                <div className={classes.stat}>
                                     <TrendingUpIcon className={classes.statIcon}/>
                                     <Typography className={classes.statText}>{totalPRs}</Typography>
                                 </div>
