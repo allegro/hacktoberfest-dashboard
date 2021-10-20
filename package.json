@@ -40,6 +40,6 @@
   },
   "reactSnap": {
     "removeBlobs": true,
-    "removeScriptTags": true
+    "removeScriptTags": false
   }
 }
