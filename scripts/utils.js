@@ -1,14 +1,14 @@
-const fs = require("fs");
+import fs from "fs";
 
 function toUsersMap(data) {
     return data.search.edges
         .filter(it => it.node.author.login !== it.node.repository.owner.login)
-        .reduce((map, edge) => {
-            const { login, avatarUrl } = edge.node.author;
-            if (!map[login]) map[login] = { avatar: avatarUrl, contributions: [], totalPRs: 0 };
-            map[login].totalPRs++;
-            map[login].contributions.push(edge.node.repository);
-            return map;
+        .reduce((acc, edge) => {
+            const id = edge.node.author.id;
+            if (!acc[id]) acc[id] = { ...edge.node.author, contributions: [], totalPRs: 0 };
+            acc[id].totalPRs++;
+            acc[id].contributions.push({ ...edge.node.repository, permalink: edge.node.permalink, createdAt: edge.node.createdAt, title: edge.node.title });
+            return acc;
         }, {})
 }
 
@@ -20,21 +20,18 @@ function getUniqueRepositoryNames(contributions) {
     return Array.from(new Set(contributions.map(repository => repository.name)))
 }
 
-function format(data) {
-    return Object.entries(toUsersMap(data)).map(([login, { avatar, contributions, totalPRs }]) => ({
-        login,
-        avatar,
-        repos: getUniqueRepositoryNames(contributions),
-        score: calculateScore(contributions),
-        totalPRs,
+export function format(data) {
+    return Object.entries(toUsersMap(data)).map(([id, data]) => ({
+        login: id,
+        ...data,
+        repos: getUniqueRepositoryNames(data.contributions),
+        score: calculateScore(data.contributions),
     })).sort((a, b) => b.score - a.score);
 }
 
-function persist({ data, eventDate, file }) {
-    fs.writeFileSync(file, JSON.stringify({ eventDate, data, updatedAt: new Date().toISOString() }), { flag: "w" });
+export function persist({ data, file }) {
+    fs.mkdir(file, { recursive: true }, (err) => {
+        if (err) throw err;
+    });
+    fs.writeFileSync(file, JSON.stringify({ data, updatedAt: new Date().toISOString() }));
 }
-
-module.exports = {
-    format,
-    persist
-};

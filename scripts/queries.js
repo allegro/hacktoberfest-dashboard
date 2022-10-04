@@ -1,15 +1,14 @@
-const { gql } = require("apollo-boost");
-
 /**
  * Creates GraphQL query fetching Pull Requests of given userNames
  * @param userNames array of userNames to get
- * @param eventDate string representing event date (YYYY-MM-DD)
- * @returns DocumentNode
+ * @param eventDate int
+ * @returns string
  */
-function getPullRequests(userNames, eventDate) {
-    return gql`
+
+export function getPullRequests(userNames, year) {
+    return `
       {
-        search(query: "is:pr created:>=${eventDate} ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
+        search(query: "is:pr created:${year}-10-01..${year}-10-31 ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
           pageInfo {
             endCursor
             startCursor
@@ -18,6 +17,7 @@ function getPullRequests(userNames, eventDate) {
             node {
               ... on PullRequest {
                 title
+                createdAt
                 repository{
                   owner {
                     login
@@ -30,8 +30,13 @@ function getPullRequests(userNames, eventDate) {
                 }
                 permalink
                 author {
-                  login
-                  avatarUrl
+                  ... on User {
+                    id
+                    name
+                    avatarUrl
+                    login
+                    bio
+                  }
                 }
               }
             }
@@ -40,5 +45,3 @@ function getPullRequests(userNames, eventDate) {
       }
     `;
 }
-
-module.exports = { getPullRequests };
