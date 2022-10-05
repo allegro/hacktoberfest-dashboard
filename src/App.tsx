@@ -7,6 +7,8 @@ import {
     createStyles,
     Group,
     Image,
+    List,
+    Paper,
     Space,
     Stack,
     Table,
@@ -16,12 +18,15 @@ import {
 } from '@mantine/core';
 import hacktoberfest2022 from './assets/hacktoberfest-2022.svg';
 import { data, updatedAt } from './data/contributions.json';
+import inspirations from './data/inspirations.json';
+import users from './data/users.json';
+import repositories from './data/repositories.json';
 import { Stats } from "./Stats";
 import { Footer } from "./Footer";
+import { User } from "./User";
 
 const useStyles = createStyles((theme) => ({
     header: {
-        paddingTop: theme.spacing.sm,
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
         borderBottom: `1px solid ${
             theme.colorScheme === 'dark' ? 'transparent' : theme.colors.gray[2]
@@ -75,6 +80,9 @@ export default function App() {
                                     {tab}
                                 </Tabs.Tab>
                             ))}
+                            <Tabs.Tab value="participants" key="participants">
+                                Participants
+                            </Tabs.Tab>
                             <Tabs.Tab value="inspirations" key="inspirations">
                                 Inspirations
                             </Tabs.Tab>
@@ -193,6 +201,48 @@ export default function App() {
                             </Tabs.Panel>
                         )
                     })}
+                    <Tabs.Panel value="inspirations">
+                        <Title pb="lg">Inspirations</Title>
+                        <List
+                            spacing="xs"
+                            size="sm"
+                            center
+                            withPadding
+                        >
+                            {inspirations.map((it, i) =>
+                                <List.Item key={`inspiration-${i}`}>
+                                    <Text>{it.title}</Text>
+                                    <Text>{it.label}</Text>
+                                </List.Item>
+                            )}
+                        </List>
+                        <Title py="lg">Repositories</Title>
+                        <List
+                            spacing="xs"
+                            size="sm"
+                            center
+                            withPadding
+                        >
+                            {repositories.map(it =>
+                                <List.Item key={it}>
+                                    <Anchor href={it}>{it}</Anchor>
+                                </List.Item>
+                            )}
+                        </List>
+                    </Tabs.Panel>
+                    <Tabs.Panel value="participants">
+                        <Paper withBorder radius="md" p="xs">
+                            <List
+                                spacing="xs"
+                                size="sm"
+                                center
+                            >
+                                {users.map(it =>
+                                    <User name={it}/>
+                                )}
+                            </List>
+                        </Paper>
+                    </Tabs.Panel>
                 </Container>
             </Tabs>
             <Footer/>
