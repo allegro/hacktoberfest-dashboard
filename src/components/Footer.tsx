@@ -1,6 +1,6 @@
 import { createStyles, Container, Group, ActionIcon, Image } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
-import allegro from './assets/allegro.svg';
+import allegro from '../assets/allegro.svg';
 
 const useStyles = createStyles((theme) => ({
     footer: {
