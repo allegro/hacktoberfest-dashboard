@@ -57,7 +57,6 @@ export default function App() {
                 defaultValue="2022"
                 variant="outline"
                 classNames={{
-                    root: classes.tabs,
                     tabsList: classes.tabsList,
                     tab: classes.tab,
                 }}
