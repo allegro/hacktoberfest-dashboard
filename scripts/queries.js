@@ -7,7 +7,7 @@
 
 export function getPullRequests(userNames, year) {
     let eventStartDate = `${year}-10-01`;
-    if (year = 2022) {
+    if (year === 2022) {
         eventStartDate = `${year}-10-14`;
     }
     return `
