@@ -5,6 +5,7 @@ function toUsersMap(data) {
         .filter(it => it.node.author.login !== it.node.repository.owner.login)
         .reduce((acc, edge) => {
             const id = edge.node.author.id;
+            if(!id) return acc;
             if (!acc[id]) acc[id] = { ...edge.node.author, contributions: [], totalPRs: 0 };
             acc[id].totalPRs++;
             acc[id].contributions.push({ ...edge.node.repository, permalink: edge.node.permalink, createdAt: edge.node.createdAt, title: edge.node.title });
