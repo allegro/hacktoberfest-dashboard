@@ -1,5 +1,4 @@
 import { getPullRequests } from "./queries.js";
-import users from '../src/data/users.json' assert { type: 'json' };
 import { format } from "./utils.js";
 import path from "path";
 import fs from "fs";
