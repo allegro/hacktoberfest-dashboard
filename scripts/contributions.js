@@ -13,6 +13,12 @@ const contributions = {
 };
 
 for (let year = now.getFullYear() - 3; year <= now.getFullYear(); year++) {
+    let users;
+    try {
+        users = JSON.parse(fs.readFileSync(`../src/data/users/${year}.json`));
+    } catch (err) {
+        users = [];
+    }
     await fetch('https://api.github.com/graphql', {
         method: 'POST',
         headers: {
