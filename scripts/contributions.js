@@ -4,6 +4,12 @@ import path from "path";
 import fs from "fs";
 
 const token = process.env['TOKEN'];
+
+if(!token) {
+    console.log('Gathering github data skipped - no token provided.');
+    process.exit(0);
+}
+
 const now = new Date();
 
 const contributions = {

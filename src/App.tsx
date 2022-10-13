@@ -2,14 +2,13 @@ import { Container, createStyles, Tabs } from '@mantine/core';
 import { data } from './data/contributions.json';
 import inspirations from './data/inspirations.json';
 import { Footer } from "./components/Footer";
-import React from "react";
 import Participants from "./tabs/Participants";
 import { Inspirations } from "./tabs/Inspirations";
 import { Contributions } from "./tabs/Contributions";
 import { Header } from "./components/Header";
 import { TabsList } from "./components/TabsList";
 
-const users = await Promise.all(Object.values(import.meta.glob('./data/users/*.json')).map(it => it()))
+const allUsers = await Promise.all(Object.values(import.meta.glob('./data/users/*.json')).map(it => it()))
                         .then(modules => [...new Set(modules.map(module => JSON.parse(JSON.stringify(module))).map(module => module.default).flat())]);
 
 const useStyles = createStyles((theme) => ({
@@ -60,7 +59,7 @@ export default function App() {
                         <Inspirations inspirations={inspirations}/>
                     </Tabs.Panel>
                     <Tabs.Panel value="participants">
-                        <Participants participants={users}/>
+                        <Participants participants={allUsers}/>
                     </Tabs.Panel>
                 </Container>
             </Tabs>
