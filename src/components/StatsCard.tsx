@@ -9,7 +9,7 @@ export function StatsCard({ value, label }: { value: number; label: string }) {
             {label}
           </Text>
           <Text weight={700} size='xl'>
-            {Intl.NumberFormat().format(value)}
+            {value > 99 ? '100+' : Intl.NumberFormat().format(value)}
           </Text>
         </Box>
       </Group>
