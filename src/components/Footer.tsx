@@ -35,7 +35,7 @@ export function Footer() {
     return (
         <div className={classes.footer}>
             <Container className={classes.inner}>
-                <Image src={allegro} width={120} />
+                <Image src={allegro} width={120} alt={"Allegro"} />
                 <Group spacing={0} className={classes.links} position="right" noWrap>
                     <ActionIcon size="lg" component="a" href="https://github.com/allegro">
                         <IconBrandGithub size={18} stroke={1.5} />
