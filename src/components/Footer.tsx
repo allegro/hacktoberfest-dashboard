@@ -40,13 +40,13 @@ export function Footer() {
                     <ActionIcon size="lg" component="a" href="https://github.com/allegro">
                         <IconBrandGithub size={18} stroke={1.5} />
                     </ActionIcon>
-                    <ActionIcon size="lg">
+                    <ActionIcon size="lg" component="a" href="https://twitter.com/allegrotech">
                         <IconBrandTwitter size={18} stroke={1.5} />
                     </ActionIcon>
-                    <ActionIcon size="lg">
+                    <ActionIcon size="lg" component="a" href="https://www.youtube.com/channel/UC66wC6RBjFk6CuVz7wdjJ5g">
                         <IconBrandYoutube size={18} stroke={1.5} />
                     </ActionIcon>
-                    <ActionIcon size="lg">
+                    <ActionIcon size="lg" component="a" href="https://www.instagram.com/allegropl">
                         <IconBrandInstagram size={18} stroke={1.5} />
                     </ActionIcon>
                 </Group>
