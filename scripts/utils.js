@@ -2,7 +2,6 @@ import fs from "fs";
 
 function toUsersMap(data) {
     return data.search.edges
-        .filter(it => it.node.author.login !== it.node.repository.owner.login)
         .reduce((acc, edge) => {
             const id = edge.node.author.id;
             if(!id) return acc;
