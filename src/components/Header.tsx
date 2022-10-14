@@ -17,7 +17,7 @@ export function Header() {
           <Title>Contributions</Title>
           <Text color='dimmed'>Last update: {time}</Text>
         </Box>
-        <Image width={200} src={hacktoberfest2022} />
+        <Image width={200} src={hacktoberfest2022} alt='Hacktoberfest 2022' />
       </Group>
     </Container>
   );
