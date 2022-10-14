@@ -1,5 +1,5 @@
 import { createStyles, Container, Group, ActionIcon, Image } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconBrandGithub } from '@tabler/icons';
 import allegro from '../assets/allegro.svg';
 
 const useStyles = createStyles((theme) => ({
@@ -37,6 +37,9 @@ export function Footer() {
             <Container className={classes.inner}>
                 <Image src={allegro} width={120} />
                 <Group spacing={0} className={classes.links} position="right" noWrap>
+                    <ActionIcon size="lg" component="a" href="https://github.com/allegro">
+                        <IconBrandGithub size={18} stroke={1.5} />
+                    </ActionIcon>
                     <ActionIcon size="lg">
                         <IconBrandTwitter size={18} stroke={1.5} />
                     </ActionIcon>
