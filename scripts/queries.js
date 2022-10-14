@@ -12,7 +12,9 @@ export function getPullRequests(userNames, year) {
   }
   return `
       {
-        search(query: "is:pr created:${eventStartDate}..${year}-10-31 ${userNames.map(username => `author:${username}`).join(' ')}", type: ISSUE, first: 100) {
+        search(query: "is:pr created:${eventStartDate}..${year}-10-31 ${userNames
+    .map((username) => `author:${username}`)
+    .join(' ')}", type: ISSUE, first: 100) {
           pageInfo {
             endCursor
             startCursor
