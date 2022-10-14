@@ -9,8 +9,8 @@ export default function Participants({ participants }: { participants: string[] 
         <StatsCard label='Total participants' value={participants.length} />
         <Paper withBorder radius='md' p='xs'>
           <List spacing='xs' size='sm' center>
-            {participants.map((login, i) => (
-              <Participant key={i} name={login} />
+            {participants.map((login) => (
+              <Participant key={login} name={login} />
             ))}
           </List>
         </Paper>
