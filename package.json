@@ -6,7 +6,10 @@
     "start": "vite --port=3000",
     "prebuild": "node scripts/contributions.js",
     "build": "tsc && vite build && cp ./dist/index.html ./dist/404.html",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "prettier": "prettier --loglevel error --write ."
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
@@ -14,14 +17,22 @@
     "@mantine/core": "^5.5.0",
     "@mantine/hooks": "^5.5.0",
     "@tabler/icons": "^1.101.0",
+    "eslint-config-prettier": "^8.5.0",
     "graphql": "^16.6.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
+    "use-query-params": "^2.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-react": "^2.1.0",
+    "eslint": "^8.25.0",
+    "eslint-plugin-react": "^7.31.10",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   }
