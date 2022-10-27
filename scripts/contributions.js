@@ -18,7 +18,7 @@ const contributions = {
 };
 
 for (let year = now.getFullYear() - 3; year <= now.getFullYear(); year++) {
-    const users = JSON.parse(fs.readFileSync(`../src/data/users/${year}.json`));
+    const users = JSON.parse(fs.readFileSync(`./src/data/users/${year}.json`));
 
     const results = [];
     let cursor = null;
@@ -55,7 +55,7 @@ for (let year = now.getFullYear() - 3; year <= now.getFullYear(); year++) {
     console.log(`Gathered ${year} contributions.`);
 }
 
-fs.writeFileSync(path.resolve(`../src/data/contributions.json`), JSON.stringify(contributions));
+fs.writeFileSync(path.resolve(`./src/data/contributions.json`), JSON.stringify(contributions));
 
 function groupByKey(list, key) {
     return list.reduce((hash, obj) => ({
