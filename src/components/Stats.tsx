@@ -11,7 +11,6 @@ export function Stats({
   return (
     <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
       <StatsCard label='Contributors' value={data[year].length} />
-      <StatsCard label='Registered' value={data[year].length} />
       <StatsCard
         label='Total PRs'
         value={data[year].reduce(
