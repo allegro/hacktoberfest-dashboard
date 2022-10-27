@@ -13,7 +13,6 @@ export function Stats({
       <StatsCard label='Total users' value={data[year].length} />
       <StatsCard
         label='Total PRs'
-        round
         value={data[year].reduce(
           (previousValue, currentValue) => previousValue + currentValue.totalPRs,
           0,

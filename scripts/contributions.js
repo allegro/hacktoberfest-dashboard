@@ -6,35 +6,60 @@ import fs from 'fs';
 const token = process.env['TOKEN'];
 
 if (!token) {
-  // eslint-disable-next-line no-console
-  console.log('Gathering github data skipped - no token provided.');
-  process.exit(0);
+    console.log('Gathering github data skipped - no token provided.');
+    process.exit(0);
 }
 
 const now = new Date();
 
 const contributions = {
-  data: {},
-  updatedAt: new Date().toISOString(),
+    data: {},
+    updatedAt: new Date().toISOString(),
 };
 
 for (let year = now.getFullYear() - 3; year <= now.getFullYear(); year++) {
-  const users = JSON.parse(fs.readFileSync(`./src/data/users/${year}.json`));
-  await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ query: getPullRequests(users, year) }),
-  })
-    .then((response) => response.json())
-    .then((it) => it.data)
-    .then(format)
-    .then((data) => (contributions.data[year] = data))
-    .then(() => console.log(`Gathered ${year} contributions.`)) // eslint-disable-line no-console
-    .catch((e) => console.error(e));
+    const users = JSON.parse(fs.readFileSync(`../src/data/users/${year}.json`));
+
+    const results = [];
+    let cursor = null;
+    let morePages = true;
+
+    while (morePages) {
+        const page = await fetch('https://api.github.com/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ query: getPullRequests(users, year, cursor) }),
+        })
+            .then((response) => response.json())
+            .then(response => {
+                if (response.data.search.pageInfo.hasNextPage) {
+                    cursor = `"${response.data.search.pageInfo.endCursor}"`;
+                } else {
+                    morePages = false;
+                }
+                return response;
+            })
+            .then((it) => it.data)
+            .then(format);
+        results.push(page);
+    }
+    contributions.data[year] = Object.values(groupByKey(results.reduce((acc, o) => {
+        acc.push(o);
+        return acc;
+    }, []).flat(), 'login')).map(list => list.reduce((acc, o) => ({ contributions: [...o.contributions, ...acc.contributions], ...o }), { contributions: [] }))
+
+    console.log(`Gathered ${year} contributions.`);
 }
 
-fs.writeFileSync(path.resolve(`src/data/contributions.json`), JSON.stringify(contributions));
+fs.writeFileSync(path.resolve(`../src/data/contributions.json`), JSON.stringify(contributions));
+
+function groupByKey(list, key) {
+    return list.reduce((hash, obj) => ({
+        ...hash,
+        [obj[key]]: (hash[obj[key]] || []).concat(obj)
+    }), {});
+}
