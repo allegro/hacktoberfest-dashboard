@@ -50,7 +50,7 @@ for (let year = now.getFullYear() - 3; year <= now.getFullYear(); year++) {
     contributions.data[year] = Object.values(groupByKey(results.reduce((acc, o) => {
         acc.push(o);
         return acc;
-    }, []).flat(), 'login')).map(list => list.reduce((acc, o) => ({ ...o, contributions: [...o.contributions, ...acc.contributions] }), { contributions: [] }))
+    }, []).flat(), 'login')).map(list => list.reduce((acc, o) => ({ ...o, contributions: [...o.contributions, ...acc.contributions], score: o.score + acc.score }), { contributions: [], score: 0 }))
 
     console.log(`Gathered ${year} contributions.`);
 }
