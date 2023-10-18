@@ -39,10 +39,12 @@ export function Repository({ repo, ...others }: { repo: string }) {
         <Text>{githubName}</Text>
         <IconExternalLink size={14} stroke={1.5} />
         {isProject && (
-          <img
-            alt='GitHub Hacktoberfest combined status'
-            src={`https://img.shields.io/github/hacktoberfest/${year}/${githubName}`}
-          />
+          <div style={{ flex: 1, flexGrow: 1, textAlign: 'right' }}>
+            <img
+              alt='GitHub Hacktoberfest combined status'
+              src={`https://img.shields.io/github/hacktoberfest/${year}/${githubName}`}
+            />
+          </div>
         )}
       </Group>
     </Anchor>
