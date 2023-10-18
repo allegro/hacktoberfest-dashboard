@@ -1,43 +1,46 @@
 import fs from 'fs';
 
 function toUsersMap(data) {
-  return data.search.edges.reduce((acc, edge) => {
-    const id = edge.node.author.id;
-    if (!id) return acc;
-    if (!acc[id]) acc[id] = { ...edge.node.author, contributions: [], totalPRs: 0 };
-    acc[id].totalPRs++;
-    acc[id].contributions.push({
-      ...edge.node.repository,
-      permalink: edge.node.permalink,
-      createdAt: edge.node.createdAt,
-      title: edge.node.title,
-    });
-    return acc;
-  }, {});
+    return data.search.edges.reduce((acc, edge) => {
+        const id = edge.node.author.id;
+        if (!id) return acc;
+        if (!acc[id]) acc[id] = {...edge.node.author, contributions: [], totalPRs: 0};
+        acc[id].totalPRs++;
+        if (edge.node.state !== "CLOSED") {
+            acc[id].contributions.push({
+                ...edge.node.repository,
+                permalink: edge.node.permalink,
+                createdAt: edge.node.createdAt,
+                title: edge.node.title,
+                state: edge.node.state,
+            });
+        }
+        return acc;
+    }, {});
 }
 
 function calculateScore(contributions) {
-  return contributions.map((it) => it.stargazers.totalCount).reduce((a, b) => a + b, 0);
+    return contributions.map((it) => it.stargazers.totalCount).reduce((a, b) => a + b, 0);
 }
 
 function getUniqueRepositoryNames(contributions) {
-  return Array.from(new Set(contributions.map((repository) => repository.name)));
+    return Array.from(new Set(contributions.map((repository) => repository.name)));
 }
 
 export function format(data) {
-  return Object.entries(toUsersMap(data))
-    .map(([id, data]) => ({
-      login: id,
-      ...data,
-      repos: getUniqueRepositoryNames(data.contributions),
-      score: calculateScore(data.contributions),
-    }))
-    .sort((a, b) => b.score - a.score);
+    return Object.entries(toUsersMap(data))
+        .map(([id, data]) => ({
+            login: id,
+            ...data,
+            repos: getUniqueRepositoryNames(data.contributions),
+            score: calculateScore(data.contributions),
+        }))
+        .sort((a, b) => b.score - a.score);
 }
 
-export function persist({ data, file }) {
-  fs.mkdir(file, { recursive: true }, (err) => {
-    if (err) throw err;
-  });
-  fs.writeFileSync(file, JSON.stringify({ data, updatedAt: new Date().toISOString() }));
+export function persist({data, file}) {
+    fs.mkdir(file, {recursive: true}, (err) => {
+        if (err) throw err;
+    });
+    fs.writeFileSync(file, JSON.stringify({data, updatedAt: new Date().toISOString()}));
 }

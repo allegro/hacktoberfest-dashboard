@@ -1,18 +1,16 @@
 /**
  * Creates GraphQL query fetching Pull Requests of given userNames
  * @param userNames array of userNames to get
- * @param eventDate int
+ * @param year int
+ * @param cursor string
  * @returns string
  */
 
 export function getPullRequests(userNames, year, cursor = null) {
-    let eventStartDate = `${year}-10-01`;
-    if (year === 2022) {
-        eventStartDate = `${year}-10-14`;
-    }
+    const eventStartDate = `${year}-10-01`;
     return `
       {
-        search(query: "is:pr created:${eventStartDate}..${year}-10-31 ${userNames
+        search(query: "is:pr draft:false created:${eventStartDate}..${year}-10-31 ${userNames
         .map((username) => `author:${username}`)
         .join(' ')}", type: ISSUE, first: 100, after: ${cursor}) {
           pageInfo {
@@ -23,6 +21,7 @@ export function getPullRequests(userNames, year, cursor = null) {
             node {
               ... on PullRequest {
                 title
+                state
                 createdAt
                 repository{
                   owner {
