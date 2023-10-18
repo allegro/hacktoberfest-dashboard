@@ -8,9 +8,11 @@ export default function Participants({ participants }: { participants: string[] 
       <Stack spacing='sm'>
         <StatsCard label='Total participants' value={participants.length} />
         <Paper withBorder radius='md' p='xs'>
-          <List spacing='xs' size='sm' center>
+          <List spacing='xs' size='sm' center listStyleType='none'>
             {participants.map((login) => (
-              <Participant key={login} name={login} />
+              <List.Item key={login}>
+                <Participant name={login} />
+              </List.Item>
             ))}
           </List>
         </Paper>
