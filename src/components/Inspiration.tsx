@@ -18,6 +18,11 @@ const useStyles = createStyles((theme) => ({
     borderStyle: 'solid',
     borderColor: theme.colors.dark[0],
   },
+  title: {
+    display: 'flex',
+    alignItems: 'baseline',
+    gap: '1em',
+  },
 }));
 
 export type InspirationObject = {
@@ -38,9 +43,11 @@ export function Inspiration({ inspiration, ...others }: { inspiration: Inspirati
       {...others}
     >
       <Group py='xs' px='sm'>
-        <Text>
-          {inspiration.title} {inspiration.label}
-        </Text>
+        <div className={classes.title}>
+          <Text>{inspiration.title}</Text>
+          <span>|</span>
+          <Text color='dimmed'>{inspiration.label}</Text>
+        </div>
         <IconExternalLink size={14} stroke={1.5} />
       </Group>
     </Anchor>
