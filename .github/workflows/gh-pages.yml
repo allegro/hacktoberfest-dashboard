@@ -6,24 +6,27 @@ on:
     - cron: '10 * * 10 *'
   push:
     branches: [ main ]
-
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: latest
       - run: npm ci
       - run: npm run build
         env:
           TOKEN: ${{secrets.TOKEN}}
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          cname: hacktoberfest.allegro.tech
+          path: './dist'
+      - id: deployment
+        uses: actions/deploy-pages@v4
