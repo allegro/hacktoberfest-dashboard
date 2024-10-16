@@ -38,6 +38,20 @@ const useStyles = createStyles((theme) => ({
       borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[2],
     },
   },
+  selectIcon: {
+    transition: 'transform 150ms ease',
+    transform: 'rotate(0deg)',
+
+    '[data-expanded] &': {
+    transform: 'rotate(180deg)',
+    }
+  },
+  selectControl: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '5px 10px',
+}
 }));
 
 export default function App() {
