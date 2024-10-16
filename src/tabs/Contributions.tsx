@@ -38,6 +38,7 @@ export function Contributions({
   }[];
 }) {
   const { colorScheme } = useMantineColorScheme();
+  const statsTheme = colorScheme === 'dark' ? 'dark' : 'default';
   return (
     <Stack spacing='sm'>
       <Stats data={data} year={year} />
@@ -147,7 +148,7 @@ export function Contributions({
                     imageProps={{ loading: 'lazy' }}
                     height={164}
                     fit='contain'
-                    src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&card_width=900&theme=${colorScheme}`}
+                    src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${user.login}&layout=compact&card_width=900&theme=${statsTheme}`}
                   />
                 </Group>
               </Accordion.Panel>
