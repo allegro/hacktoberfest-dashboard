@@ -27,7 +27,11 @@ export function Body({ classes, allUsers }: { classes: Record<any, any>; allUser
       <div className={classes.header}>
         <Header />
         <Container>
-          <TabsList tabs={Object.keys(data).reverse()} onClick={handleTabChange} />
+          <TabsList
+            tabs={Object.keys(data).reverse()}
+            onClick={handleTabChange}
+            classNames={{ icon: classes.selectIcon, control: classes.selectControl }}
+          />
         </Container>
       </div>
       <Container p='lg'>
