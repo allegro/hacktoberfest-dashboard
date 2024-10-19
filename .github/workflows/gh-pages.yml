@@ -3,7 +3,7 @@ name: github pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * 10 *'
+    - cron: '10 * * 10 *'
   push:
     branches: [ main ]
 permissions:
